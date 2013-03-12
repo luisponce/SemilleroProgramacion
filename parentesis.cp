@@ -1,18 +1,13 @@
-/* 
- * File:   main.cpp
- * Author: luismiguel
- *
- * Created on 3 de marzo de 2013, 02:16 PM
- */
 
 
 using namespace std;
 #include <iostream>
 #include <stack>
 
+
 int main() {
     char parentesis1 = 40;
-    char parentesis2 =41;
+    char parentesis2 = 41;
     char corchetes1=91;
     char corchetes2=93;
     
@@ -20,36 +15,45 @@ int main() {
     
     int cases;
     cin>>cases;
+    string useles;
+    getline(cin, useles);
     bool ans[cases];
     for (int i=0; i<cases; i++){
-        
-        
-        char curChar;
-        cin>>curChar;
+        if (s.size()>0) 
+                for (int i=0; i<s.size(); i++) s.pop();
         ans[i]=true;
-        if (curChar==32) ans[i]==true;
+        string line;
+        getline(cin, line);
+        if (line=="") ans[i]==true;
         else {
-            
-            
-            if (s.size()>0){
-                if (s.top()==parentesis1){
-                    if (curChar==parentesis2) s.pop();
-                    else ans[i]==false;
-                }
-                else {
-                    if (s.top()==corchetes1){
-                        if (curChar==corchetes2) s.pop();
-                        else ans[i]==false;
+            for (int j=0; j<line.length() && ans[i]==true; j++){
+                char curChar = line[j];
+                if (s.size()==0){
+                    if (curChar==parentesis1 || curChar==corchetes1)
+                        s.push(curChar);
+                    else ans[i]=false;
+                } else {
+                    if (curChar==parentesis1) {
+                        s.push(curChar);
+                    }else if (curChar==parentesis2){
+                        if (s.top()==parentesis1) s.pop();
+                        else ans[i]=false;
+                    } else if (curChar==corchetes1){
+                        s.push(curChar);
+                    } else if (curChar==corchetes2) {
+                        if (s.top()==corchetes1) s.pop();
+                        else ans[i]=false;
                     }
                 }
-            } else {
-                s.push(curChar);
+                
             }
         }
+        if (s.size()!=0) ans[i]=false;
     }
     for (int i=0; i<cases;i++){
-        if (ans[i]) cout<<"yes";
-        else cout<<"no";
+        if (ans[i]==true) cout<<"yes"<<endl;
+        else cout<<"no"<<endl;
     }
     return 0;
 }
+
