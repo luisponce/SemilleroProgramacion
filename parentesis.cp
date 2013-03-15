@@ -51,8 +51,8 @@ int main() {
         if (s.size()!=0) ans[i]=false;
     }
     for (int i=0; i<cases;i++){
-        if (ans[i]==true) cout<<"yes"<<endl;
-        else cout<<"no"<<endl;
+        if (ans[i]==true) cout<<"Yes"<<endl;
+        else cout<<"No"<<endl;
     }
     return 0;
 }
