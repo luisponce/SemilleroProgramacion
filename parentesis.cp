@@ -6,10 +6,10 @@ using namespace std;
 
 
 int main() {
-    char parentesis1 = 40;
-    char parentesis2 = 41;
-    char corchetes1=91;
-    char corchetes2=93;
+    char parentesis1 = "(";
+    char parentesis2 = ")";
+    char corchetes1="[";
+    char corchetes2="]";
     
     stack <char> s;
     
