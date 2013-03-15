@@ -1,15 +1,23 @@
+//
+//  main.cpp
+//  c++ Tester
+//
+//  Created by Luis Ponce De Leon on 2/28/13.
+//  Copyright (c) 2013 Luis Ponce De Leon. All rights reserved.
+//
 
 
-using namespace std;
 #include <iostream>
+#include <cstdio>
 #include <stack>
+using namespace std;
 
 
 int main() {
-    char parentesis1 = "(";
-    char parentesis2 = ")";
-    char corchetes1="[";
-    char corchetes2="]";
+    char parentesis1 = '(';
+    char parentesis2 = ')';
+    char corchetes1='[';
+    char corchetes2=']';
     
     stack <char> s;
     
@@ -19,12 +27,11 @@ int main() {
     getline(cin, useles);
     bool ans[cases];
     for (int i=0; i<cases; i++){
-        if (s.size()>0) 
-                for (int i=0; i<s.size(); i++) s.pop();
+        while (s.size()) {s.pop();}
         ans[i]=true;
         string line;
         getline(cin, line);
-        if (line=="") ans[i]==true;
+        if (line=="") ans[i]=true;
         else {
             for (int j=0; j<line.length() && ans[i]==true; j++){
                 char curChar = line[j];
@@ -33,27 +40,26 @@ int main() {
                         s.push(curChar);
                     else ans[i]=false;
                 } else {
-                    if (curChar==parentesis1) {
+                    if (curChar==parentesis1 || curChar==corchetes1) {
                         s.push(curChar);
                     }else if (curChar==parentesis2){
                         if (s.top()==parentesis1) s.pop();
                         else ans[i]=false;
-                    } else if (curChar==corchetes1){
-                        s.push(curChar);
-                    } else if (curChar==corchetes2) {
+                    }else if (curChar==corchetes2) {
                         if (s.top()==corchetes1) s.pop();
                         else ans[i]=false;
                     }
                 }
                 
             }
+            if (s.size()!=0) ans[i]=false;
         }
-        if (s.size()!=0) ans[i]=false;
+        printf("%s\n",ans[i]?"Yes":"No");
     }
-    for (int i=0; i<cases;i++){
-        if (ans[i]==true) cout<<"Yes"<<endl;
-        else cout<<"No"<<endl;
-    }
+    //for (int i=0; i<cases;i++){
+    //    if (ans[i]==true) cout<<"Yes"<<endl;
+    //    else cout<<"No"<<endl;
+    //}
     return 0;
 }
 
