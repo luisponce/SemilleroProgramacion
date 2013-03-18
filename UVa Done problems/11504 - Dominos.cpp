@@ -1,10 +1,3 @@
-/* 
- * File:   main.cpp
- * Author: luismiguel
- *
- * Created on 3 de marzo de 2013, 02:16 PM
- */
-
 
 using namespace std;
 #include <iostream>

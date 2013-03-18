@@ -1,10 +1,3 @@
-//
-//  main.cpp
-//  c++ Tester
-//
-//  Created by Luis Ponce De Leon on 2/28/13.
-//  Copyright (c) 2013 Luis Ponce De Leon. All rights reserved.
-//
 using namespace std;
 #include <iostream>
 #include <vector>
@@ -83,4 +76,3 @@ int main()
     
     return 0;
 }
-
