@@ -1,34 +1,49 @@
 
-#include <iostream>
 using namespace std;
-#include<queue>
-#include<vector>
-#include <algorithm>
-#include <stdlib.h>
+#include <iostream>
+#include <numeric>
+#include <fstream>
+#include <climits>
+#include <cstring>
+#include <cstdio>
+#include <cmath>
+#include <queue>
+#include <list>
+#include <map>
+#include <set>
+#include <stack>
+#include <deque>
+#include <vector>
+#include <string>
+#include <cstdlib>
+#include <cassert>
 #include <sstream>
+#include <iterator>
+#include <algorithm>
 
 typedef pair <int, int> dist_node;
 typedef pair <int, int> edge;
-const int MAXN = 501;
+const int MAXN = 505;
 const int INF = 1<<30;
 vector <edge> g[MAXN];
 vector <int> fireH;
-vector <int> posible;
 int d[MAXN];
-int dFinal[MAXN];
 bool isFireH[MAXN];
 int ans;
 
-void dijkstra(int s, int n){
+int dijkstra(int s){
 	priority_queue <dist_node, vector<dist_node>, greater<dist_node> > q;
 	q.push(dist_node(0,s));
-	for (int i=0; i<n; i++) d[i]=INF;
+	for (int i=0; i<MAXN; i++) d[i]=INF;
 	d[s]=0;
 	while(!q.empty()){
 		int dist = q.top().first;
 		int cur = q.top().second;
 		q.pop();
-		
+		if (isFireH[cur]) {
+			if (dist<d[cur]) return dist;
+			else return d[cur];
+		}
 		if(dist > d[cur]) continue;
 		for (int i=0; i<g[cur].size(); ++i) {
 			int next = g[cur][i].first;
@@ -39,14 +54,11 @@ void dijkstra(int s, int n){
 			}
 		}
 	}
-	
-//	for(int i=0; i<n; i++){
-//		dFinal[i]+=d[i];
-//	}
 }
 
 int main() {
 	int cases;
+	int maxDistancia;
 	cin>>cases;
 	while(cases--){		
 		//lee datos
@@ -55,12 +67,8 @@ int main() {
 		
 		//limpieza
 		int ans=-1;
-		fireH.clear();
-		posible.clear();
-		for (int i=0; i<n; i++){
+		for (int i=0; i<MAXN; i++){
 			g[i].clear();
-			dFinal[i]=0;
-			d[i]=INF;
 			
 			isFireH[i]=false;
 		}
@@ -70,7 +78,6 @@ int main() {
 			int firePos;
 			cin>>firePos; firePos--;
 			isFireH[firePos]=true;
-			fireH.push_back(firePos);
 		}
 		
 		string tmp;
@@ -89,102 +96,36 @@ int main() {
 			
 			getline(cin, line);
 		}
-		
-		ans=-1;
+		ans = -1;
 		int menorDistancia=INF;
 		for (int u=0; u<n; u++){
-			if (!isFireH[u]) {
+				bool originalVal=isFireH[u];
 				isFireH[u]=true;
-				fireH.push_back(u);
-				
-				int maxDistancia=0;;
+				maxDistancia=0;
 				for (int i=0; i<n; i++){
-					if (!isFireH[i]){
-						dijkstra(i, n);
-						int distMejorEstacion=INF;
-						for (int j=0; j<fireH.size(); j++){
-							if (d[fireH[j]]<distMejorEstacion)
-								distMejorEstacion = d[fireH[j]];
+						int dist = dijkstra(i);
+						if (dist > maxDistancia){
+							maxDistancia= dist;
 						}
-						
-						if (distMejorEstacion>maxDistancia) 
-							maxDistancia=distMejorEstacion;
-					}
 				}
 				
 				if (maxDistancia<menorDistancia) {
 					menorDistancia=maxDistancia;
-					ans=fireH[u];
+					ans=u;
 				}
 				
-				isFireH[u]=false;
-				fireH.pop_back();
-			}
+				isFireH[u]=originalVal;
 			
 			
 		}
 		
-		
-//		if (f==0){
-//			for (int i=0; i<n; i++) dFinal[i]=0;
-//			for (int i=0; i<n; i++){
-//				dijkstra(i, n);
-//			}
-//			
-//			int curBest=0;
-//			for (int i=0; i<n; i++){
-//				if (dFinal[i]<dFinal[curBest]) curBest=i;
-//			}
-//			ans=curBest;
-//		} else {
-//			
-//			//guarda en dFinal las sumas de distancias entre las f estaciones
-//			dFinal[fireH[0]]=0;
-//			for(int i=0; i<f; i++) dijkstra(fireH[i], n);
-//			
-//			
-//			//obtiene cual es el valor de distacia maximo
-//			int max=0;
-//			for(int i=0; i<n; i++) {
-//				if(dFinal[i]>=max) max=dFinal[i];
-//			}
-//			
-//			//obtiene los posibles lugares para la estacion
-//			//y revisa que no exista ya una estacion en el posible nodo
-//			for (int i=0; i<n; i++) {
-//				if(dFinal[i]==max){
-//					bool notPosible = false;
-//					for (int j=0; j<f && !notPosible; j++) {
-//						if (i==fireH[j]) notPosible=true;
-//					}
-//					if (!notPosible) posible.push_back(i);
-//				} 
-//			}
-//			
-//			//de los posibles obtiene el mejor candidato para la estacion
-//			int bestDif=INF;
-//			int curDif=0;
-//			for (int i=0; i<posible.size(); i++){
-//				dijkstra(posible[i], n);
-//				curDif = d[fireH[0]];
-//				for (int j=1; j<f; j++){
-//					curDif-=d[fireH[j]];
-//				}
-//				curDif=abs(curDif);
-//				if (curDif<bestDif){
-//					ans=posible[i];
-//					bestDif=curDif;
-//				}
-//			}
-//			
-//		}
-		
 		//print
-		if (cases!=0) cout<<(ans+1)<<endl<<endl;
-		else cout<<(ans+1);
+		cout<<(ans+1);
+		if (cases>=0) {
+			puts(""); puts("");
+		}
 	}
 	
-    
     return 0;
 }
 
