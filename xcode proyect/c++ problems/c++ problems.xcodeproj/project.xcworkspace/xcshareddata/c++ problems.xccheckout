@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C902278F-6B99-4C23-B106-6C840147C3FB</string>
+	<key>IDESourceControlProjectName</key>
+	<string>c++ problems</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>A4746593-AFC0-4983-9259-BA17BF127DCB</key>
+		<string>https://github.com/luisponce/SemilleroProgramacion.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>xcode proyect/c++ problems/c++ problems.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>A4746593-AFC0-4983-9259-BA17BF127DCB</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/luisponce/SemilleroProgramacion.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>A4746593-AFC0-4983-9259-BA17BF127DCB</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A4746593-AFC0-4983-9259-BA17BF127DCB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SemilleroProgramacion</string>
+		</dict>
+	</array>
+</dict>
+</plist>
